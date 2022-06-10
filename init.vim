@@ -6,6 +6,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree'
 Plug 'neomake/neomake'
@@ -27,7 +28,7 @@ let g:jedi#completions_enabled = 0
 " open the go-to function in split, not another buffer
 let g:jedi#use_splits_not_buffers = "right"
 let g:neomake_python_enabled_makers = ['pylint']
-
+" Custom tmux mapping for seemless movment through windows
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
@@ -40,6 +41,8 @@ imap jj <Esc>
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 colorscheme gruvbox
 set background=dark
+" setting basic airline theme
+"let g:airline_theme=simple
 
 let g:neomake_python_enabled_makers = ['pylint']
 call neomake#configure#automake('nrwi', 500)
@@ -48,21 +51,21 @@ let g:highlightedyank_highlight_duration = 1000
 hi HighlightedyankRegion cterm=reverse gui=reverse
 
 set number
-set mouse=a 
+set mouse=a
 
 hi HighlightedyankRegion cterm=reverse gui=reverse
 " set highlight duration time to 1000 ms, i.e., 1 second
 let g:highlightedyank_highlight_duration = 1000
 
 let mapleader = "," " map leader to comma
-set timeoutlen=500  " Set timeout length to 500 ms
+set timeoutlen=1500  " Set timeout length to 500 ms
 
 " Custom function
 function! ToggleLineNumber()
-  if v:version > 703
-    set norelativenumber!
-  endif
-  set nonumber!
+	if v:version > 703
+		set norelativenumber!
+	endif
+	set nonumber!
 endfunction
 
 " Custom shortcuts
