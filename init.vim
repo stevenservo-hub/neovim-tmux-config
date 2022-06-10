@@ -15,6 +15,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'pearofducks/ansible-vim'
 Plug 'scrooloose/nerdcommenter'
 call plug#end()
+"neomake basic config, need to customize
 call neomake#configure#automake('nrwi', 500)
 let g:deoplete#enable_at_startup = 1
 " Enable alignment
@@ -30,6 +31,11 @@ let g:jedi#use_splits_not_buffers = "right"
 let g:neomake_python_enabled_makers = ['pylint']
 " Custom tmux mapping for seemless movment through windows
 let g:tmux_navigator_no_mappings = 1
+"Nerdtree Opens to right side.
+let g:NERDTreeWinPos = "right"
+
+"Tmux navigation seemless and directional movement between 
+"vim windows and tmux windows
 nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
@@ -74,10 +80,23 @@ map <leader>r :call ToggleLineNumber()<CR>
 map <leader>t :NERDTreeToggle<CR>
 map <leader>n :set number<CR>
 
-" Automatically close NERDTree when you open a file
-let NERDTreeQuitOnOpen=1
-
 " Alternative leader and shortcut
 let mapleader="-"
 map <leader>n :set nonumber<CR>
+
+" Open nerdtree window on opening Vim and have cursor default to open file and
+autocmd VimEnter * if argc() == 1 | NERDTree | wincmd p | else | NERDTree | endif
+" not nerdtree
+" Refresh the current folder if any changes
+autocmd BufEnter NERD_tree_* | execute 'normal R'
+au CursorHold * if exists("t:NerdTreeBufName") | call <SNR>15_refreshRoot() | endif
+
+"Reload the window if directory is changed
+augroup DIRCHANGE
+    au!
+    autocmd DirChanged global :NERDTreeCWD
+augroup END
+
+"Close nerdtree automatically if it is theonly window open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
