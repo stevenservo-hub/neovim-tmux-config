@@ -2,6 +2,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'machakann/vim-highlightedyank'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sbdchd/neoformat'
+"Plug 'github/copilot.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
