@@ -13,8 +13,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'neomake/neomake'
 Plug 'machakann/vim-highlightedyank'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'pearofducks/ansible-vim'
 Plug 'scrooloose/nerdcommenter'
+Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
 call plug#end()
 "neomake basic config, need to customize
 call neomake#configure#automake('nrwi', 500)
@@ -48,24 +48,23 @@ imap jj <Esc>
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 colorscheme gruvbox
 set background=dark
+set number
+set mouse=a
 " setting basic airline theme
 "let g:airline_theme=simple
-
 let g:neomake_python_enabled_makers = ['pylint']
 call neomake#configure#automake('nrwi', 500)
 
 let g:highlightedyank_highlight_duration = 1000
 hi HighlightedyankRegion cterm=reverse gui=reverse
 
-set number
-set mouse=a
 
 hi HighlightedyankRegion cterm=reverse gui=reverse
 " set highlight duration time to 1000 ms, i.e., 1 second
 let g:highlightedyank_highlight_duration = 1000
 
 let mapleader = "," " map leader to comma
-set timeoutlen=1500  " Set timeout length to 500 ms
+set timeoutlen=500  " Set timeout length to 500 ms
 
 " Custom function
 function! ToggleLineNumber()
@@ -80,11 +79,11 @@ map <leader>h :noh<CR>
 map <leader>r :call ToggleLineNumber()<CR>
 map <leader>t :NERDTreeToggle<CR>
 map <leader>n :set number<CR>
-
+map <leader>nn :set nonumber<CR>
+map <leader>mm :set mouse=<CR>
+map <leader>m :set mouse=a<CR>
 " Alternative leader and shortcut
 let mapleader="-"
-map <leader>n :set nonumber<CR>
-
 " Open nerdtree window on opening Vim and have cursor default to open file and
 autocmd VimEnter * if argc() == 1 | NERDTree | wincmd p | else | NERDTree | endif
 " not nerdtree
