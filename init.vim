@@ -46,6 +46,7 @@ nnoremap <silent> <c-0> :TmuxNavigatePrevious<cr>
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 imap jj <Esc>
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
 colorscheme gruvbox
 set background=dark
 set number
