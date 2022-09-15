@@ -34,7 +34,6 @@ let g:neomake_python_enabled_makers = ['pylint']
 let g:tmux_navigator_no_mappings = 1
 "Nerdtree Opens to right side.
 let g:NERDTreeWinPos = "right"
-
 "Tmux navigation seemless and directional movement between 
 "vim windows and tmux windows
 nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
@@ -46,11 +45,12 @@ nnoremap <silent> <c-0> :TmuxNavigatePrevious<cr>
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 imap jj <Esc>
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
 colorscheme gruvbox
 set background=dark
 set number
+set relativenumber
 set mouse=a
+set so=999
 " setting basic airline theme
 "let g:airline_theme=simple
 let g:neomake_python_enabled_makers = ['pylint']
@@ -83,6 +83,7 @@ map <leader>n :set number<CR>
 map <leader>nn :set nonumber<CR>
 map <leader>mm :set mouse=<CR>
 map <leader>m :set mouse=a<CR>
+
 " Alternative leader and shortcut
 let mapleader="-"
 " Open nerdtree window on opening Vim and have cursor default to open file and
@@ -91,7 +92,7 @@ autocmd VimEnter * if argc() == 1 | NERDTree | wincmd p | else | NERDTree | endi
 " Refresh the current folder if any changes
 autocmd BufEnter NERD_tree_* | execute 'normal R'
 au CursorHold * if exists("t:NerdTreeBufName") | call <SNR>15_refreshRoot() | endif
-
+au FocusLost * !silent update
 "Reload the window if directory is changed
 augroup DIRCHANGE
     au!
